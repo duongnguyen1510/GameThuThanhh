@@ -12,7 +12,8 @@ namespace HoangAnh
     }
     public class TitleMapHA : MonoBehaviour
     {
-        [FormerlySerializedAs("TypeTitleMap")] [Space, Header("Data Title")] 
+        [FormerlySerializedAs("TypeTitleMap")] 
+		[Space, Header("Data Title")] 
         public ETitleMapHA typeTitleMapHa;
         public int column;
         public int row;
