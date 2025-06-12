@@ -9,8 +9,10 @@ namespace HoangAnh
     {
         [SerializeField] private LayerMask layerTitle;
         [SerializeField] private Camera camera;
+        [SerializeField] private Tank tankPrefab;
 
         private TitleMapHA titleMapCache;
+        private Tank tankCache;
         
         private void Update()
         {
@@ -26,10 +28,17 @@ namespace HoangAnh
                         {
                             titleMapCache.EnableOutLine(false);
                         }
+                        if (tankCache != null)
+                        {
+                            Destroy(tankCache.gameObject);
+                        }
                         titleMapCache = titleMapHa;
                         if (titleMapCache.typeTitleMapHa == ETitleMapHA.TANK)
                         {
                             titleMapCache.EnableOutLine(true);
+                            tankCache = Instantiate(tankPrefab, transform);
+                            tankCache.transform.position = titleMapCache.transform.position;
+                            tankCache.Initialized();
                         }
                     }
                 }
@@ -40,6 +49,10 @@ namespace HoangAnh
                         titleMapCache.EnableOutLine(false);
                         titleMapCache = null;
                     }
+                    if (tankCache != null)
+                    {
+                        Destroy(tankCache.gameObject);
+                    }
                 }
             }
 
@@ -49,6 +62,10 @@ namespace HoangAnh
                 {
                     titleMapCache.EnableOutLine(false);
                     titleMapCache = null;
+                }
+                if (tankCache != null)
+                {
+                    tankCache = null;
                 }
             }
         }
