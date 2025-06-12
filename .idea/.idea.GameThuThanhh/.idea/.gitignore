@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Default ignored files
 /shelf/
 /workspace.xml
@@ -5,6 +6,15 @@
 /modules.xml
 /contentModel.xml
 /projectSettingsUpdater.xml
+=======
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/projectSettingsUpdater.xml
+/contentModel.xml
+/modules.xml
+>>>>>>> 3e6d87e9543c0b2e4487b8797cbd8b8a3cca7dec
 /.idea.GameThuThanhh.iml
 # Editor-based HTTP Client requests
 /httpRequests/

@@ -7,6 +7,7 @@ namespace HoangAnh
 {
     public class EnemyManager : MonoBehaviour
     {
+        public const int NumberEnemyInOneWare = 5;
         public static EnemyManager Ins;
 
         [Space, Header("Enemy")] 
@@ -19,20 +20,36 @@ namespace HoangAnh
             Ins = this;
         }
 
-        private void Update()
+        public void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                EnemyHA enemy = SpawnEnemy();
-                enemy.SetupData(SpawnMapHa.ListPath);
-                enemy.transform.position = SpawnMapHa.ListPath[0].transform.position;
+                SpawmWare(2);
             }
         }
 
-        private EnemyHA SpawnEnemy()
+        public void SpawmWare(int ware)
+        {
+            int numberEnemySpawn = NumberEnemyInOneWare + ware * 3;
+            StartCoroutine(ISpawnWare(numberEnemySpawn));
+        }
+
+        IEnumerator ISpawnWare(int numberSpawn)
+        {
+            for (int i = 0; i < numberSpawn; i++)
+            {
+                SpawnEnemy();
+                yield return new WaitForSeconds(1f);
+            }
+        }
+
+        private void SpawnEnemy()
         {
             EnemyHA enemySpawn = Instantiate(enemyPrefab, transpawnEnemy);
-            return enemySpawn;
+            enemySpawn.SetupData(SpawnMapHa.ListPath);
+            Vector3 posSpawn = SpawnMapHa.ListPath[0].transform.position;
+            posSpawn.x -= 1f;
+            enemySpawn.transform.position = posSpawn;
         }
     }
 }
