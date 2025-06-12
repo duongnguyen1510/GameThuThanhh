@@ -9,8 +9,15 @@ namespace HoangAnh
     {
         [SerializeField] private LayerMask layerTitle;
         [SerializeField] private Camera camera;
+<<<<<<< HEAD
 
         private TitleMapHA titleMapCache;
+=======
+        [SerializeField] private Tank tankPrefab;
+
+        private TitleMapHA titleMapCache;
+        private Tank tankCache;
+>>>>>>> 2a9a859e8e227b2b6c8a0311e6552b4eccfe79fe
         
         private void Update()
         {
@@ -26,10 +33,23 @@ namespace HoangAnh
                         {
                             titleMapCache.EnableOutLine(false);
                         }
+<<<<<<< HEAD
+=======
+                        if (tankCache != null)
+                        {
+                            Destroy(tankCache.gameObject);
+                        }
+>>>>>>> 2a9a859e8e227b2b6c8a0311e6552b4eccfe79fe
                         titleMapCache = titleMapHa;
                         if (titleMapCache.typeTitleMapHa == ETitleMapHA.TANK)
                         {
                             titleMapCache.EnableOutLine(true);
+<<<<<<< HEAD
+=======
+                            tankCache = Instantiate(tankPrefab, transform);
+                            tankCache.transform.position = titleMapCache.transform.position;
+                            tankCache.Initialized();
+>>>>>>> 2a9a859e8e227b2b6c8a0311e6552b4eccfe79fe
                         }
                     }
                 }
@@ -40,6 +60,13 @@ namespace HoangAnh
                         titleMapCache.EnableOutLine(false);
                         titleMapCache = null;
                     }
+<<<<<<< HEAD
+=======
+                    if (tankCache != null)
+                    {
+                        Destroy(tankCache.gameObject);
+                    }
+>>>>>>> 2a9a859e8e227b2b6c8a0311e6552b4eccfe79fe
                 }
             }
 
@@ -50,6 +77,13 @@ namespace HoangAnh
                     titleMapCache.EnableOutLine(false);
                     titleMapCache = null;
                 }
+<<<<<<< HEAD
+=======
+                if (tankCache != null)
+                {
+                    tankCache = null;
+                }
+>>>>>>> 2a9a859e8e227b2b6c8a0311e6552b4eccfe79fe
             }
         }
     }

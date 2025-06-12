@@ -420,6 +420,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   camera: {fileID: 963194227}
+<<<<<<< HEAD
+=======
+  tankPrefab: {fileID: 2846218767560943965, guid: 884eeac6b8ca1174cbe6956221cbd9e8, type: 3}
+>>>>>>> 2a9a859e8e227b2b6c8a0311e6552b4eccfe79fe
 --- !u!1 &1207273656
 GameObject:
   m_ObjectHideFlags: 0
