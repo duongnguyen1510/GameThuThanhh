@@ -20,6 +20,7 @@ namespace HoangAnh
         [Space, Header("GameObjTitle")] 
         [SerializeField] private GameObject objTitleTank;
         [SerializeField] private GameObject objTitleWall;
+        [SerializeField] private Outline outline;
 
         public void SetupTitleMap(ETitleMapHA type, int column, int row)
         {
@@ -40,8 +41,14 @@ namespace HoangAnh
 
         public void ResetData()
         {
+            EnableOutLine(false);
             objTitleTank.SetActive(false);
             objTitleWall.SetActive(false);
+        }
+
+        public void EnableOutLine(bool enable)
+        {
+            outline.enabled = enable;
         }
     }
 }
