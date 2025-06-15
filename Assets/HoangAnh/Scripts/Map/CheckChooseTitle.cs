@@ -37,6 +37,7 @@ namespace HoangAnh
                         {
                             titleMapCache.EnableOutLine(true);
                             tankCache = Instantiate(tankPrefab, transform);
+                            tankCache.EnableRangeAtt(true);
                             tankCache.transform.position = titleMapCache.transform.position;
                             tankCache.Initialized();
                         }
@@ -51,7 +52,9 @@ namespace HoangAnh
                     }
                     if (tankCache != null)
                     {
+                        tankCache.EnableRangeAtt(false);
                         Destroy(tankCache.gameObject);
+                        tankCache = null;
                     }
                 }
             }
@@ -65,6 +68,7 @@ namespace HoangAnh
                 }
                 if (tankCache != null)
                 {
+                    tankCache.EnableRangeAtt(false);
                     tankCache = null;
                 }
             }

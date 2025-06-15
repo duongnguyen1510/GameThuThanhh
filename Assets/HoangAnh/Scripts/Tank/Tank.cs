@@ -2,15 +2,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace HoangAnh
 {
     public class Tank : MonoBehaviour
     {
-        [Space, Header("Visual")]
-        [SerializeField] private GameObject[] visualsTanks;
+        [Space, Header("Properties")] 
+        [SerializeField] private int levelCurrent;
 
-        public int levelCurrent = 1;
+        [FormerlySerializedAs("_TransSpawnVisual")]
+        [Space, Header("Component")] 
+        [SerializeField] private Transform _transSpawnVisual;
+        [SerializeField] private Transform _transRangeAtt;
+
+        public int LevelCurrent
+        {
+            get => levelCurrent;
+        }
+
+        private DataTankSO dataTankSO;
+        private DataTankContainerSO dataTankContainerSO;
+        private GameObject objVisual;
 
         public void Initialized()
         {
@@ -31,17 +44,25 @@ namespace HoangAnh
 
         private void UpdateVisual()
         {
-            for(int i = 0; i < visualsTanks.Length; i++)
+            if (dataTankContainerSO == null)
             {
-                if (i + 1 == levelCurrent)
-                {
-                    visualsTanks[i].SetActive(true);
-                }
-                else
-                {
-                    visualsTanks[i].SetActive(false);
-                }
+                dataTankContainerSO = DataManager.Ins.DataTankContainerSO;
             }
+            if (dataTankContainerSO.MaxLevelTank < levelCurrent)
+            {
+                levelCurrent = dataTankContainerSO.MaxLevelTank;
+            }
+            dataTankSO = dataTankContainerSO.GetDataTankSO(levelCurrent);
+            if (objVisual != null)
+            {
+                Destroy(objVisual.gameObject);
+            }
+            objVisual = Instantiate(dataTankSO.Data.visualPrefab, _transSpawnVisual);
+        }
+
+        public void EnableRangeAtt(bool enable)
+        {
+            _transRangeAtt.gameObject.SetActive(enable);
         }
     }
 }

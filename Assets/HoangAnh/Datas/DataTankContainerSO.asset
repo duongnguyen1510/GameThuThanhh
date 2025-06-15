@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d1593808a2fe99419aaadc014e25200, type: 3}
+  m_Name: DataTankContainerSO
+  m_EditorClassIdentifier: 
+  _maxLevelTank: 4
+  _listDataTankSO:
+  - {fileID: 11400000, guid: a658cb063e0cab843b4ad4d1e9db6ff2, type: 2}
+  - {fileID: 11400000, guid: 07c95b3bc89ef08458623ca22e348349, type: 2}
+  - {fileID: 11400000, guid: 591a6ef3d7bf092409b829d5902bb843, type: 2}
+  - {fileID: 11400000, guid: b7ea5ac43dfa4644cbd5ebb7fe7eb08f, type: 2}
