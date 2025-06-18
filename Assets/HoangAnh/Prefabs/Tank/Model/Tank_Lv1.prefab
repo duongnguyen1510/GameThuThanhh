@@ -412,6 +412,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3144614975553784394}
+  - component: {fileID: 5530348231846539198}
   m_Layer: 0
   m_Name: Tank_Lv1
   m_TagString: Untagged
@@ -427,7 +428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2971367929645462007}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.38268343, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -435,7 +436,22 @@ Transform:
   - {fileID: 2932137658986320763}
   - {fileID: 5900684998562158589}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
+--- !u!114 &5530348231846539198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2971367929645462007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 182518ee4a336104e92bc0c520869280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transPointsSpawn:
+  - {fileID: 5723676158639913225}
+  _transVisualShoot: {fileID: 5900684998562158589}
 --- !u!1 &3004078978093813047
 GameObject:
   m_ObjectHideFlags: 0

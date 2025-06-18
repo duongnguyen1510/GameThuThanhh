@@ -11,10 +11,16 @@ namespace HoangAnh
 
         [Space, Header("Data Tanks")] 
         [SerializeField] DataTankContainerSO _dataTankContainerSO;
+        [SerializeField] Bullet _bulletPrefab;
 
         public DataTankContainerSO DataTankContainerSO
         {
             get => _dataTankContainerSO;
+        }
+
+        public Bullet BulletPrefab
+        {
+            get => _bulletPrefab;
         }
         
         private void Awake()

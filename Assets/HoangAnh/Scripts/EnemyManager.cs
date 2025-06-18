@@ -14,6 +14,12 @@ namespace HoangAnh
         [SerializeField] private EnemyHA enemyPrefab;
         [SerializeField] private Transform transpawnEnemy;
         [SerializeField] private SpawnMapHA SpawnMapHa;
+
+        private List<EnemyHA> listEnemy = new List<EnemyHA>();
+        public List<EnemyHA> ListEnemy
+        {
+            get => listEnemy;
+        }
         
         private void Awake()
         {
@@ -24,7 +30,7 @@ namespace HoangAnh
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SpawmWare(2);
+                SpawmWare(1);
             }
         }
 
@@ -39,13 +45,14 @@ namespace HoangAnh
             for (int i = 0; i < numberSpawn; i++)
             {
                 SpawnEnemy();
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(2f);
             }
         }
 
         private void SpawnEnemy()
         {
             EnemyHA enemySpawn = Instantiate(enemyPrefab, transpawnEnemy);
+            listEnemy.Add(enemySpawn);
             enemySpawn.SetupData(SpawnMapHa.ListPath);
             Vector3 posSpawn = SpawnMapHa.ListPath[0].transform.position;
             posSpawn.x -= 1f;

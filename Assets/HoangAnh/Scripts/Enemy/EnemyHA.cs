@@ -9,16 +9,38 @@ namespace HoangAnh
     {
         [Space,Header("Animation")]
         [SerializeField] Animator _animator;
+        [SerializeField] private Renderer _renderer;
+        [SerializeField] Transform _transPositionTarget;
+        [SerializeField] private Color _colorHit;
+        [SerializeField] private Color _colorDefault;
         
-        public List<TitleMapHA> ListPath = new List<TitleMapHA>();
-        public float speed = 1;
+        public Transform TransPositionTarget
+        {
+            get => _transPositionTarget;
+        }
+        private Material materialCurrent;
+        private Coroutine coroutine;
+        private List<TitleMapHA> ListPath = new List<TitleMapHA>();
+        private float speed = 0.5f;
+        private float healthCurrent = 30;
+        
+        public bool isDie;
+        
         public void SetupData(List<TitleMapHA> ListPath)
         {
             this.ListPath = new List<TitleMapHA>(ListPath);
+            materialCurrent = _renderer.material;
+            _animator.SetBool("isDie", false);
+            _animator.SetBool("isRun", false);
+            isDie = false;
         }
         
         public void Update()
         {
+            if (isDie)
+            {
+                return;
+            }
             if (ListPath.Count > 0)
             {
                 TitleMapHA titleTarget = ListPath[0];
@@ -50,6 +72,72 @@ namespace HoangAnh
                     }
                 }
             }
+        }
+        
+        public void TakeDamage(float damage)
+        {
+            if (healthCurrent > 0)
+            {
+                healthCurrent -= damage;
+                if (coroutine != null)
+                {
+                    StopCoroutine(coroutine);
+                }
+                coroutine = StartCoroutine(ChangeColor(materialCurrent, _colorDefault, _colorHit, 0.1f, 0.1f));
+                if (healthCurrent <= 0)
+                {
+                    isDie = true;
+                    _animator.SetBool("isDie", true);
+                    float timeDeath = GetTimePlayAnimation("Death");
+                    timeDeath += 0.1f; 
+                    StartCoroutine(IWaitDeath(timeDeath));
+                }
+            }
+        }
+
+        private IEnumerator IWaitDeath(float timeDeath)
+        {
+            yield return new WaitForSeconds(timeDeath);
+            Death();
+        }
+        
+        private float GetTimePlayAnimation(string animName)
+        {
+            RuntimeAnimatorController controller = _animator.runtimeAnimatorController;
+            float timeDuration = 0;
+            foreach (var clip in controller.animationClips)
+            {
+                if (clip.name == animName)
+                {
+                    timeDuration = clip.length;
+                    break;
+                }
+            }
+            return timeDuration;
+        }
+
+        private void Death()
+        {
+            EnemyManager.Ins.ListEnemy.Remove(this);
+            Destroy(gameObject);
+        }
+        
+        public IEnumerator ChangeColor(Material material, Color fromColor, Color toColor, float duration, float timeWait)
+        {
+            yield return StartCoroutine(LerpColor(material, fromColor, toColor, duration));
+            yield return new WaitForSeconds(timeWait);
+            StartCoroutine(LerpColor(material, toColor, fromColor, duration));
+        }
+        private IEnumerator LerpColor(Material material, Color fromColor, Color toColor, float duration)
+        {
+            float time = 0f;
+            while (time < duration)
+            {
+                time += Time.deltaTime;
+                material.color = Color.Lerp(fromColor, toColor, time / duration);
+                yield return null;
+            }
+            material.color = toColor;
         }
     }
 }

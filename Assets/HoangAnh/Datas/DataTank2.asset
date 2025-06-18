@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data:
     idTank: 2
-    visualPrefab: {fileID: 8184629395609161103, guid: 80aa013a07b75ca4ebe4bb6f0c09046c, type: 3}
-    speed: 6
-    dame: 6
+    visualPrefab: {fileID: 8929441536689245105, guid: 80aa013a07b75ca4ebe4bb6f0c09046c, type: 3}
+    speed: 0.5
     rangeAtt: 4
+    dataBullet:
+      dame: 20
+      speed: 6

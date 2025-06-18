@@ -15,18 +15,33 @@ namespace HoangAnh
         [Space, Header("Component")] 
         [SerializeField] private Transform _transSpawnVisual;
         [SerializeField] private Transform _transRangeAtt;
-
+        [SerializeField] private TankShoot _tankShoot;
+        
         public int LevelCurrent
         {
             get => levelCurrent;
         }
 
+        private DataManager dataManager;
         private DataTankSO dataTankSO;
         private DataTankContainerSO dataTankContainerSO;
-        private GameObject objVisual;
+        private TankVisual _tankVisual;
 
+        public TankVisual TankVisual
+        {
+            get => _tankVisual;
+        }
+        
         public void Initialized()
         {
+            if (_tankShoot == null)
+            {
+                _tankShoot = transform.GetComponent<TankShoot>();
+            }
+            if (dataManager == null)
+            {
+                dataManager = DataManager.Ins;
+            }
             ResetData();
         }
 
@@ -46,23 +61,39 @@ namespace HoangAnh
         {
             if (dataTankContainerSO == null)
             {
-                dataTankContainerSO = DataManager.Ins.DataTankContainerSO;
+                dataTankContainerSO = dataManager.DataTankContainerSO;
             }
             if (dataTankContainerSO.MaxLevelTank < levelCurrent)
             {
                 levelCurrent = dataTankContainerSO.MaxLevelTank;
             }
             dataTankSO = dataTankContainerSO.GetDataTankSO(levelCurrent);
-            if (objVisual != null)
+            _tankShoot.Initialized(dataTankSO.Data, this);
+            if (_tankVisual != null)
             {
-                Destroy(objVisual.gameObject);
+                Destroy(_tankVisual.gameObject);
             }
-            objVisual = Instantiate(dataTankSO.Data.visualPrefab, _transSpawnVisual);
+            _tankVisual = Instantiate(dataTankSO.Data.visualPrefab, _transSpawnVisual);
         }
 
         public void EnableRangeAtt(bool enable)
         {
             _transRangeAtt.gameObject.SetActive(enable);
+        }
+
+        public void SpawnBullet(EnemyHA enemy)
+        {
+            Transform[] pointsSpawn = TankVisual.TransPointsSpawn;
+            foreach (var pointSpawn in pointsSpawn)
+            {
+                Bullet bullet = Instantiate(dataManager.BulletPrefab);
+                bullet.SetupData(dataTankSO.Data.dataBullet, enemy);
+                bullet.transform.position = pointSpawn.position;
+                Vector3 targetPosition = enemy.TransPositionTarget.position;
+                targetPosition.y = pointSpawn.position.y;
+                Vector3 dirToEnemy = (targetPosition - pointSpawn.position).normalized;
+                _tankVisual.TransVisualShoot.rotation = Quaternion.LookRotation(dirToEnemy);
+            }
         }
     }
 }

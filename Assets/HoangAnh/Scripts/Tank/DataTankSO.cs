@@ -18,9 +18,16 @@ namespace HoangAnh
     public class DataTank
     {
         public int idTank;
-        public GameObject visualPrefab;
+        public TankVisual visualPrefab;
         public float speed;
-        public float dame;
         public float rangeAtt;
+        public DataBullet dataBullet;
+    }
+
+    [System.Serializable]
+    public class DataBullet
+    {
+        public float dame;
+        public float speed;
     }
 }
