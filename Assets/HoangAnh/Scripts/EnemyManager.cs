@@ -20,6 +20,8 @@ namespace HoangAnh
         {
             get => listEnemy;
         }
+        public int CountEnemyInWare { get; private set; }
+        public int CountEnemyCurrent { get; private set; }
         
         private void Awake()
         {
@@ -42,6 +44,8 @@ namespace HoangAnh
 
         IEnumerator ISpawnWare(int numberSpawn)
         {
+            CountEnemyInWare = numberSpawn;
+            CountEnemyCurrent = numberSpawn;
             for (int i = 0; i < numberSpawn; i++)
             {
                 SpawnEnemy();
@@ -57,6 +61,11 @@ namespace HoangAnh
             Vector3 posSpawn = SpawnMapHa.ListPath[0].transform.position;
             posSpawn.x -= 1f;
             enemySpawn.transform.position = posSpawn;
+        }
+
+        public void EnemyDeath()
+        {
+            CountEnemyCurrent--;
         }
     }
 }

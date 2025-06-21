@@ -118,6 +118,7 @@ namespace HoangAnh
 
         private void Death()
         {
+            EnemyManager.Ins.EnemyDeath();
             EnemyManager.Ins.ListEnemy.Remove(this);
             Destroy(gameObject);
         }
