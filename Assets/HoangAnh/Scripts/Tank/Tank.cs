@@ -6,6 +6,11 @@ using UnityEngine.Serialization;
 
 namespace HoangAnh
 {
+    public enum EStateTank
+    {
+        PAUSE,
+        PLAY
+    }
     public class Tank : MonoBehaviour
     {
         [Space, Header("Properties")] 
@@ -26,7 +31,7 @@ namespace HoangAnh
         private DataTankSO dataTankSO;
         private DataTankContainerSO dataTankContainerSO;
         private TankVisual _tankVisual;
-
+        public EStateTank StateTankCurrent { get; private set; }
         public TankVisual TankVisual
         {
             get => _tankVisual;
@@ -42,7 +47,13 @@ namespace HoangAnh
             {
                 dataManager = DataManager.Ins;
             }
+            StateTankCurrent = EStateTank.PAUSE;
             ResetData();
+        }
+
+        public void ActiveTank()
+        {
+            StateTankCurrent = EStateTank.PLAY;
         }
 
         private void ResetData()

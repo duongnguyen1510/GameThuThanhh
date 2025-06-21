@@ -22,6 +22,7 @@ namespace HoangAnh
             if (enemyManager.ListEnemy != null)
             {
                 txt_Count.text = "Enemy: " + enemyManager.CountEnemyCurrent + "/" + enemyManager.CountEnemyInWare;
+                txt_Count.text = $"Enemy: {enemyManager.CountEnemyCurrent}/{enemyManager.CountEnemyInWare}";
             }
         }
     }

@@ -16,6 +16,10 @@ namespace HoangAnh
         
         private void Update()
         {
+            if (GameManager.StateGameCurrent != EStateGame.PLAY)
+            {
+                return;
+            }
             if (Input.GetMouseButton(0))
             {
                 Ray ray = camera.ScreenPointToRay(Input.mousePosition);
@@ -68,6 +72,7 @@ namespace HoangAnh
                 }
                 if (tankCache != null)
                 {
+                    tankCache.ActiveTank();
                     tankCache.EnableRangeAtt(false);
                     tankCache = null;
                 }

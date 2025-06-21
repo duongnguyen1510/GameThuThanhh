@@ -37,6 +37,10 @@ namespace HoangAnh
         
         public void Update()
         {
+            if (GameManager.StateGameCurrent != EStateGame.PLAY)
+            {
+                return;
+            }
             if (isDie)
             {
                 return;

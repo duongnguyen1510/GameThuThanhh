@@ -30,9 +30,9 @@ namespace HoangAnh
 
         public void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (GameManager.StateGameCurrent != EStateGame.PLAY)
             {
-                SpawmWare(1);
+                return;
             }
         }
 

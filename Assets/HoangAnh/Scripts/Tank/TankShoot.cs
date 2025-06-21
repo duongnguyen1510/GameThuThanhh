@@ -25,6 +25,10 @@ namespace HoangAnh
         
         private void Update()
         {
+            if (GameManager.StateGameCurrent != EStateGame.PLAY || tank.StateTankCurrent != EStateTank.PLAY)
+            {
+                return;
+            }
             if (enemyManager == null)
             {
                 enemyManager = EnemyManager.Ins;
